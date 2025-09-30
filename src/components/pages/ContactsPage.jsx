@@ -6,6 +6,12 @@ import ApperIcon from "@/components/ApperIcon";
 import { contactService } from "@/services/api/contactService";
 import { toast } from "react-toastify";
 
+const { ApperClient } = window.ApperSDK;
+
+const apperClient = new ApperClient({
+  apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+  apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+});
 const ContactsPage = () => {
   const [currentView, setCurrentView] = useState("list"); // "list", "create", "edit", "detail"
   const [selectedContact, setSelectedContact] = useState(null);
@@ -38,7 +44,7 @@ const ContactsPage = () => {
     }
   };
 
-  const handleFormSubmit = async (formData) => {
+const handleFormSubmit = async (formData) => {
     try {
       setIsLoading(true);
       
@@ -48,8 +54,39 @@ const ContactsPage = () => {
         toast.success("Contact updated successfully!");
       } else {
         // Create new contact
-        await contactService.create(formData);
+        const createdContact = await contactService.create(formData);
         toast.success("Contact created successfully!");
+        
+        // Schedule booking in ScheduleOnce
+        try {
+          const result = await apperClient.functions.invoke(
+            import.meta.env.VITE_SCHEDULE_BOOKING,
+            {
+              body: JSON.stringify({
+                firstName: createdContact.firstName,
+                lastName: createdContact.lastName,
+                email: createdContact.email,
+                phone: createdContact.phone,
+                company: createdContact.company
+              }),
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            }
+          );
+
+          const responseData = await result.json();
+          
+          if (responseData.success) {
+            toast.success("Booking scheduled successfully!");
+          } else {
+            console.info(`apper_info: An error was received in this function: ${import.meta.env.VITE_SCHEDULE_BOOKING}. The response body is: ${JSON.stringify(responseData)}.`);
+            toast.error(responseData.error || "Failed to schedule booking");
+          }
+        } catch (bookingError) {
+          console.info(`apper_info: An error was received in this function: ${import.meta.env.VITE_SCHEDULE_BOOKING}. The error is: ${bookingError.message}`);
+          toast.error("Failed to schedule booking - contact created successfully");
+        }
       }
       
       setCurrentView("list");

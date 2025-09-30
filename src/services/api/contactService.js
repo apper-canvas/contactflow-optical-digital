@@ -22,7 +22,7 @@ class ContactService {
     return { ...contact };
   }
 
-  async create(contactData) {
+async create(contactData) {
     await delay(400);
     
     // Find the highest existing Id and add 1
