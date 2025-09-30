@@ -4,8 +4,9 @@ import { cn } from "@/utils/cn";
 import ApperIcon from "@/components/ApperIcon";
 
 const Sidebar = ({ isMobileMenuOpen, setIsMobileMenuOpen }) => {
-  const navigation = [
+const navigation = [
     { name: "Dashboard", href: "/", icon: "Home" },
+    { name: "Leads", href: "/leads", icon: "Target" },
     { name: "Contacts", href: "/contacts", icon: "Users" },
   ];
   const handleNavClick = () => {

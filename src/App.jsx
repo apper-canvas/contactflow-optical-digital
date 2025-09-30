@@ -13,6 +13,7 @@ import PromptPassword from "@/components/pages/PromptPassword";
 import NotFound from "@/components/pages/NotFound";
 import DashboardPage from "@/components/pages/DashboardPage";
 import ContactsPage from "@/components/pages/ContactsPage";
+import LeadsPage from "@/components/pages/LeadsPage";
 import Layout from "@/components/organisms/Layout";
 
 // Create auth context
@@ -139,6 +140,7 @@ function AppContent() {
           <Route path="/reset-password/:appId/:fields" element={<ResetPassword />} />
           <Route path="/" element={<Layout />}>
             <Route index element={<DashboardPage />} />
+<Route path="leads" element={<LeadsPage />} />
             <Route path="contacts" element={<ContactsPage />} />
           </Route>
           <Route path="*" element={<NotFound />} />
