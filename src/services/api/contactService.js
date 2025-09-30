@@ -43,10 +43,10 @@ class ContactService {
       }
       
       // Parse nested JSON fields
-      return response.data.map(contact => ({
+return response.data.map(contact => ({
         ...contact,
-        address_c: contact.address_c ? JSON.parse(contact.address_c) : null,
-        social_media_c: contact.social_media_c ? JSON.parse(contact.social_media_c) : null
+        address_c: contact.address_c || null,
+        social_media_c: contact.social_media_c || null
       }));
     } catch (error) {
       console.error("Error fetching contacts:", error?.response?.data?.message || error);
@@ -84,9 +84,9 @@ class ContactService {
       // Parse nested JSON fields
       const contact = response.data;
       return {
-        ...contact,
-        address_c: contact.address_c ? JSON.parse(contact.address_c) : null,
-        social_media_c: contact.social_media_c ? JSON.parse(contact.social_media_c) : null
+...contact,
+        address_c: contact.address_c || null,
+        social_media_c: contact.social_media_c || null
       };
     } catch (error) {
       console.error(`Error fetching contact ${id}:`, error?.response?.data?.message || error);
@@ -148,9 +148,9 @@ class ContactService {
         if (successful.length > 0) {
           const createdContact = successful[0].data;
           return {
-            ...createdContact,
-            address_c: createdContact.address_c ? JSON.parse(createdContact.address_c) : null,
-            social_media_c: createdContact.social_media_c ? JSON.parse(createdContact.social_media_c) : null
+...createdContact,
+            address_c: createdContact.address_c || null,
+            social_media_c: createdContact.social_media_c || null
           };
         }
       }
@@ -217,9 +217,9 @@ class ContactService {
         if (successful.length > 0) {
           const updatedContact = successful[0].data;
           return {
-            ...updatedContact,
-            address_c: updatedContact.address_c ? JSON.parse(updatedContact.address_c) : null,
-            social_media_c: updatedContact.social_media_c ? JSON.parse(updatedContact.social_media_c) : null
+...updatedContact,
+            address_c: updatedContact.address_c || null,
+            social_media_c: updatedContact.social_media_c || null
           };
         }
       }
@@ -317,10 +317,10 @@ class ContactService {
       }
       
       // Parse nested JSON fields
-      return response.data.map(contact => ({
+return response.data.map(contact => ({
         ...contact,
-        address_c: contact.address_c ? JSON.parse(contact.address_c) : null,
-        social_media_c: contact.social_media_c ? JSON.parse(contact.social_media_c) : null
+        address_c: contact.address_c || null,
+        social_media_c: contact.social_media_c || null
       }));
     } catch (error) {
       console.error("Error searching contacts:", error?.response?.data?.message || error);
