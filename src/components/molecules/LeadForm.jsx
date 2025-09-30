@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { contactService } from "@/services/api/contactService";
+import { userService } from "@/services/api/userService";
 import ApperIcon from "@/components/ApperIcon";
 import Button from "@/components/atoms/Button";
 import Input from "@/components/atoms/Input";
@@ -26,7 +26,7 @@ useEffect(() => {
     const loadUsers = async () => {
       try {
         setLoadingUsers(true);
-        const data = await contactService.getUsers();
+const data = await userService.getUsers();
         setUsers(data);
       } catch (error) {
         console.error("Error loading users:", error);
