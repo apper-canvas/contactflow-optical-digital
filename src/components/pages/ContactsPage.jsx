@@ -1,11 +1,10 @@
 import React, { useState } from "react";
+import ContactGrid from "@/components/organisms/ContactGrid";
+import ContactForm from "@/components/molecules/ContactForm";
+import ContactDetail from "@/components/molecules/ContactDetail";
+import ApperIcon from "@/components/ApperIcon";
 import { contactService } from "@/services/api/contactService";
 import { toast } from "react-toastify";
-import ApperIcon from "@/components/ApperIcon";
-import ContactGrid from "@/components/organisms/ContactGrid";
-import ContactDetail from "@/components/molecules/ContactDetail";
-import ContactForm from "@/components/molecules/ContactForm";
-import Error from "@/components/ui/Error";
 
 const { ApperClient } = window.ApperSDK;
 
@@ -58,50 +57,35 @@ const handleFormSubmit = async (formData) => {
         const createdContact = await contactService.create(formData);
         toast.success("Contact created successfully!");
         
-        // Trigger schedule booking via Apper edge function
+        // Schedule booking in ScheduleOnce
         try {
-          const bookingResult = await window.Apper.edgeFunction(
+          const result = await apperClient.functions.invoke(
             import.meta.env.VITE_SCHEDULE_BOOKING,
             {
-              firstName: createdContact.firstName,
-              lastName: createdContact.lastName,
-              email: createdContact.email,
-              phone: createdContact.phone,
-              company: createdContact.company
+              body: JSON.stringify({
+                firstName: createdContact.firstName,
+                lastName: createdContact.lastName,
+                email: createdContact.email,
+                phone: createdContact.phone,
+                company: createdContact.company
+              }),
+              headers: {
+                'Content-Type': 'application/json'
+              }
             }
           );
 
-          // Validate edge function response
-          if (!bookingResult) {
-            throw new Error('No response from booking service');
-          }
-
-          // Check if booking was successful
-          if (bookingResult.success) {
-            const bookingUrl = bookingResult.data?.bookingUrl || bookingResult.data?.booking_url;
-            const bookingId = bookingResult.data?.bookingId || bookingResult.data?.booking_id;
-            toast.success(
-              `Booking scheduled for ${createdContact.firstName}` +
-              (bookingId ? ` (ID: ${bookingId})` : '')
-            );
+          const responseData = await result.json();
+          
+          if (responseData.success) {
+            toast.success("Booking scheduled successfully!");
           } else {
-            // Handle edge function error response
-            const errorMessage = bookingResult.error || 
-                               bookingResult.data?.error || 
-                               'Unknown booking error';
-            console.error('Booking failed:', errorMessage, bookingResult);
-            toast.warning(
-              `Contact created but booking failed: ${errorMessage}`
-            );
+            console.info(`apper_info: An error was received in this function: ${import.meta.env.VITE_SCHEDULE_BOOKING}. The response body is: ${JSON.stringify(responseData)}.`);
+            toast.error(responseData.error || "Failed to schedule booking");
           }
         } catch (bookingError) {
-          // Handle network or unexpected errors
-          console.error('Booking request failed:', bookingError);
           console.info(`apper_info: An error was received in this function: ${import.meta.env.VITE_SCHEDULE_BOOKING}. The error is: ${bookingError.message}`);
-          const errorMsg = bookingError?.message || 'Connection error';
-          toast.warning(
-            `Contact created but booking failed: ${errorMsg}`
-          );
+          toast.error("Failed to schedule booking - contact created successfully");
         }
       }
       
