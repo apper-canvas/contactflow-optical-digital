@@ -23,10 +23,10 @@ const [errors, setErrors] = useState({});
   const [users, setUsers] = useState([]);
   const [loadingUsers, setLoadingUsers] = useState(false);
 useEffect(() => {
-    const loadUsers = async () => {
+const loadUsers = async () => {
       try {
         setLoadingUsers(true);
-const data = await userService.getUsers();
+        const data = await userService.getAll();
         setUsers(data);
       } catch (error) {
         console.error("Error loading users:", error);
