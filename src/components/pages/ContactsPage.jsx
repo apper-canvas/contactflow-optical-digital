@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ContactGrid from "@/components/organisms/ContactGrid";
 import ContactForm from "@/components/molecules/ContactForm";
 import ContactDetail from "@/components/molecules/ContactDetail";
-import ApperIcon from "@/components/atoms/ApperIcon";
+import ApperIcon from "@/components/ApperIcon";
 import { contactService } from "@/services/api/contactService";
 import { toast } from "react-toastify";
 
