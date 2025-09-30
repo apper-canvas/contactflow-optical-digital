@@ -8,6 +8,13 @@ const ContactDetail = ({ contact, onEdit, onDelete, onClose }) => {
 
   const formatAddress = (address) => {
     if (!address) return "";
+    if (typeof address === 'string') {
+      try {
+        address = JSON.parse(address);
+      } catch (e) {
+        return "";
+      }
+    }
     const parts = [
       address.street,
       address.city,
@@ -17,6 +24,18 @@ const ContactDetail = ({ contact, onEdit, onDelete, onClose }) => {
     ].filter(Boolean);
     return parts.join(", ");
   };
+  
+  const parseSocialMedia = (socialMedia) => {
+    if (!socialMedia) return null;
+    if (typeof socialMedia === 'string') {
+      try {
+        return JSON.parse(socialMedia);
+      } catch (e) {
+        return null;
+      }
+    }
+    return socialMedia;
+  };
 
   const formatDate = (dateString) => {
     return new Date(dateString).toLocaleDateString("en-US", {
@@ -25,6 +44,8 @@ const ContactDetail = ({ contact, onEdit, onDelete, onClose }) => {
       day: "numeric"
     });
   };
+  
+  const socialMediaParsed = parseSocialMedia(contact.social_media_c);
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -33,15 +54,15 @@ const ContactDetail = ({ contact, onEdit, onDelete, onClose }) => {
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-4">
             <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center text-2xl font-bold">
-              {getInitials(contact.firstName, contact.lastName)}
+{getInitials(contact.first_name_c, contact.last_name_c)}
             </div>
             <div>
               <h1 className="text-2xl font-bold">
-                {contact.firstName} {contact.lastName}
+                {contact.first_name_c} {contact.last_name_c}
               </h1>
-              {contact.jobTitle && contact.company && (
+              {contact.job_title_c && contact.company_c && (
                 <p className="text-primary-100 text-lg">
-                  {contact.jobTitle} at {contact.company}
+                  {contact.job_title_c} at {contact.company_c}
                 </p>
               )}
             </div>
@@ -85,21 +106,21 @@ const ContactDetail = ({ contact, onEdit, onDelete, onClose }) => {
             Contact Information
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {contact.email && (
+{contact.email_c && (
               <div className="flex items-start space-x-3">
                 <ApperIcon name="Mail" className="w-5 h-5 text-gray-400 mt-0.5" />
                 <div>
                   <p className="text-sm font-medium text-gray-500">Email</p>
-                  <p className="text-gray-900">{contact.email}</p>
+                  <p className="text-gray-900">{contact.email_c}</p>
                 </div>
               </div>
             )}
-            {contact.phone && (
+            {contact.phone_c && (
               <div className="flex items-start space-x-3">
                 <ApperIcon name="Phone" className="w-5 h-5 text-gray-400 mt-0.5" />
                 <div>
                   <p className="text-sm font-medium text-gray-500">Phone</p>
-                  <p className="text-gray-900">{contact.phone}</p>
+                  <p className="text-gray-900">{contact.phone_c}</p>
                 </div>
               </div>
             )}
@@ -107,28 +128,28 @@ const ContactDetail = ({ contact, onEdit, onDelete, onClose }) => {
         </div>
 
         {/* Company Information */}
-        {(contact.company || contact.jobTitle) && (
+{(contact.company_c || contact.job_title_c) && (
           <div>
             <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
               <ApperIcon name="Building" className="w-5 h-5 text-primary-500" />
               Company Information
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {contact.company && (
+              {contact.company_c && (
                 <div className="flex items-start space-x-3">
                   <ApperIcon name="Building2" className="w-5 h-5 text-gray-400 mt-0.5" />
                   <div>
                     <p className="text-sm font-medium text-gray-500">Company</p>
-                    <p className="text-gray-900">{contact.company}</p>
+                    <p className="text-gray-900">{contact.company_c}</p>
                   </div>
                 </div>
               )}
-              {contact.jobTitle && (
+              {contact.job_title_c && (
                 <div className="flex items-start space-x-3">
                   <ApperIcon name="Briefcase" className="w-5 h-5 text-gray-400 mt-0.5" />
                   <div>
                     <p className="text-sm font-medium text-gray-500">Job Title</p>
-                    <p className="text-gray-900">{contact.jobTitle}</p>
+                    <p className="text-gray-900">{contact.job_title_c}</p>
                   </div>
                 </div>
               )}
@@ -137,7 +158,7 @@ const ContactDetail = ({ contact, onEdit, onDelete, onClose }) => {
         )}
 
         {/* Address */}
-        {contact.address && formatAddress(contact.address) && (
+{contact.address_c && formatAddress(contact.address_c) && (
           <div>
             <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
               <ApperIcon name="MapPin" className="w-5 h-5 text-primary-500" />
@@ -147,23 +168,23 @@ const ContactDetail = ({ contact, onEdit, onDelete, onClose }) => {
               <ApperIcon name="MapPin" className="w-5 h-5 text-gray-400 mt-0.5" />
               <div>
                 <p className="text-sm font-medium text-gray-500">Address</p>
-                <p className="text-gray-900">{formatAddress(contact.address)}</p>
+                <p className="text-gray-900">{formatAddress(contact.address_c)}</p>
               </div>
             </div>
           </div>
         )}
 
         {/* Social Media */}
-        {contact.socialMedia && Object.values(contact.socialMedia).some(url => url) && (
+{socialMediaParsed && Object.values(socialMediaParsed).some(url => url) && (
           <div>
             <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
               <ApperIcon name="Share2" className="w-5 h-5 text-primary-500" />
               Social Media
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {contact.socialMedia.linkedin && (
+              {socialMediaParsed.linkedin && (
                 <a
-                  href={contact.socialMedia.linkedin}
+                  href={socialMediaParsed.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
@@ -172,9 +193,9 @@ const ContactDetail = ({ contact, onEdit, onDelete, onClose }) => {
                   <span className="text-gray-900">LinkedIn Profile</span>
                 </a>
               )}
-              {contact.socialMedia.twitter && (
+              {socialMediaParsed.twitter && (
                 <a
-                  href={contact.socialMedia.twitter}
+                  href={socialMediaParsed.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
@@ -183,9 +204,9 @@ const ContactDetail = ({ contact, onEdit, onDelete, onClose }) => {
                   <span className="text-gray-900">Twitter Profile</span>
                 </a>
               )}
-              {contact.socialMedia.facebook && (
+              {socialMediaParsed.facebook && (
                 <a
-                  href={contact.socialMedia.facebook}
+                  href={socialMediaParsed.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
@@ -194,9 +215,9 @@ const ContactDetail = ({ contact, onEdit, onDelete, onClose }) => {
                   <span className="text-gray-900">Facebook Profile</span>
                 </a>
               )}
-              {contact.socialMedia.instagram && (
+              {socialMediaParsed.instagram && (
                 <a
-                  href={contact.socialMedia.instagram}
+                  href={socialMediaParsed.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
@@ -210,26 +231,26 @@ const ContactDetail = ({ contact, onEdit, onDelete, onClose }) => {
         )}
 
         {/* Notes */}
-        {contact.notes && (
+{contact.notes_c && (
           <div>
             <h2 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
               <ApperIcon name="FileText" className="w-5 h-5 text-primary-500" />
               Notes
             </h2>
             <div className="bg-gray-50 p-4 rounded-lg">
-              <p className="text-gray-900 whitespace-pre-wrap">{contact.notes}</p>
+              <p className="text-gray-900 whitespace-pre-wrap">{contact.notes_c}</p>
             </div>
           </div>
         )}
 
         {/* Metadata */}
-        <div className="border-t border-gray-200 pt-6">
+<div className="border-t border-gray-200 pt-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-gray-500">
             <div>
-              <span className="font-medium">Created:</span> {formatDate(contact.createdAt)}
+              <span className="font-medium">Created:</span> {formatDate(contact.CreatedOn)}
             </div>
             <div>
-              <span className="font-medium">Last Updated:</span> {formatDate(contact.updatedAt)}
+              <span className="font-medium">Last Updated:</span> {formatDate(contact.ModifiedOn)}
             </div>
           </div>
         </div>

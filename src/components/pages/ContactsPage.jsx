@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import ContactGrid from "@/components/organisms/ContactGrid";
-import ContactForm from "@/components/molecules/ContactForm";
-import ContactDetail from "@/components/molecules/ContactDetail";
-import ApperIcon from "@/components/ApperIcon";
 import { contactService } from "@/services/api/contactService";
 import { toast } from "react-toastify";
+import ApperIcon from "@/components/ApperIcon";
+import ContactGrid from "@/components/organisms/ContactGrid";
+import ContactDetail from "@/components/molecules/ContactDetail";
+import ContactForm from "@/components/molecules/ContactForm";
 
 const { ApperClient } = window.ApperSDK;
 
@@ -32,8 +32,8 @@ const ContactsPage = () => {
     setCurrentView("detail");
   };
 
-  const handleDeleteContact = async (contact) => {
-    if (window.confirm(`Are you sure you want to delete ${contact.firstName} ${contact.lastName}?`)) {
+const handleDeleteContact = async (contact) => {
+    if (window.confirm(`Are you sure you want to delete ${contact.first_name_c} ${contact.last_name_c}?`)) {
       try {
         await contactService.delete(contact.Id);
         setCurrentView("list");
@@ -59,15 +59,21 @@ const handleFormSubmit = async (formData) => {
         
         // Schedule booking in ScheduleOnce
         try {
+          const { ApperClient } = window.ApperSDK;
+          const apperClient = new ApperClient({
+            apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+            apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+          });
+          
           const result = await apperClient.functions.invoke(
             import.meta.env.VITE_SCHEDULE_BOOKING,
             {
               body: JSON.stringify({
-                firstName: createdContact.firstName,
-                lastName: createdContact.lastName,
-                email: createdContact.email,
-                phone: createdContact.phone,
-                company: createdContact.company
+                first_name_c: createdContact.first_name_c,
+                last_name_c: createdContact.last_name_c,
+                email_c: createdContact.email_c,
+                phone_c: createdContact.phone_c,
+                company_c: createdContact.company_c
               }),
               headers: {
                 'Content-Type': 'application/json'

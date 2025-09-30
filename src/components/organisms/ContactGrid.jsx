@@ -34,25 +34,25 @@ const ContactGrid = ({ onCreateContact, onViewContact, onEditContact }) => {
   }, []);
 
   useEffect(() => {
-    if (!searchTerm) {
+if (!searchTerm) {
       setFilteredContacts(contacts);
     } else {
       const filtered = contacts.filter(contact => {
         const searchLower = searchTerm.toLowerCase();
         return (
-          contact.firstName?.toLowerCase().includes(searchLower) ||
-          contact.lastName?.toLowerCase().includes(searchLower) ||
-          contact.email?.toLowerCase().includes(searchLower) ||
-          contact.company?.toLowerCase().includes(searchLower) ||
-          contact.phone?.includes(searchTerm)
+          contact.first_name_c?.toLowerCase().includes(searchLower) ||
+          contact.last_name_c?.toLowerCase().includes(searchLower) ||
+          contact.email_c?.toLowerCase().includes(searchLower) ||
+          contact.company_c?.toLowerCase().includes(searchLower) ||
+          contact.phone_c?.includes(searchTerm)
         );
       });
       setFilteredContacts(filtered);
     }
   }, [contacts, searchTerm]);
 
-  const handleDeleteContact = async (contact) => {
-    if (window.confirm(`Are you sure you want to delete ${contact.firstName} ${contact.lastName}?`)) {
+const handleDeleteContact = async (contact) => {
+    if (window.confirm(`Are you sure you want to delete ${contact.first_name_c} ${contact.last_name_c}?`)) {
       try {
         await contactService.delete(contact.Id);
         await loadContacts();

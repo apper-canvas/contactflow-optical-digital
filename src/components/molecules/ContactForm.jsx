@@ -5,67 +5,73 @@ import Label from "@/components/atoms/Label";
 import ApperIcon from "@/components/ApperIcon";
 
 const ContactForm = ({ contact, onSubmit, onCancel, isLoading }) => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    company: "",
-    jobTitle: "",
-    address: {
+const [formData, setFormData] = useState({
+    first_name_c: "",
+    last_name_c: "",
+    email_c: "",
+    phone_c: "",
+    company_c: "",
+    job_title_c: "",
+    address_c: {
       street: "",
       city: "",
       state: "",
       zipCode: "",
       country: "",
     },
-    socialMedia: {
+    social_media_c: {
       linkedin: "",
       twitter: "",
       facebook: "",
       instagram: "",
     },
-    notes: "",
-    tags: [],
+    notes_c: "",
+    tags_c: "",
   });
 
   const [errors, setErrors] = useState({});
 
-  useEffect(() => {
+useEffect(() => {
     if (contact) {
       setFormData({
-        ...contact,
-        address: contact.address || {
+        first_name_c: contact.first_name_c || "",
+        last_name_c: contact.last_name_c || "",
+        email_c: contact.email_c || "",
+        phone_c: contact.phone_c || "",
+        company_c: contact.company_c || "",
+        job_title_c: contact.job_title_c || "",
+        address_c: contact.address_c || {
           street: "",
           city: "",
           state: "",
           zipCode: "",
           country: "",
         },
-        socialMedia: contact.socialMedia || {
+        social_media_c: contact.social_media_c || {
           linkedin: "",
           twitter: "",
           facebook: "",
           instagram: "",
         },
-        tags: contact.tags || [],
+        notes_c: contact.notes_c || "",
+        tags_c: contact.tags_c || "",
       });
     }
   }, [contact]);
 
-  const validateForm = () => {
+const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.firstName.trim()) {
-      newErrors.firstName = "First name is required";
+    if (!formData.first_name_c.trim()) {
+      newErrors.first_name_c = "First name is required";
     }
-    if (!formData.lastName.trim()) {
-      newErrors.lastName = "Last name is required";
+    if (!formData.last_name_c.trim()) {
+      newErrors.last_name_c = "Last name is required";
     }
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email address";
+    if (!formData.email_c.trim()) {
+      newErrors.email_c = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email_c)) {
+      newErrors.email_c = "Please enter a valid email address";
     }
 
     setErrors(newErrors);
@@ -107,50 +113,50 @@ const ContactForm = ({ contact, onSubmit, onCancel, isLoading }) => {
             <Input
               id="firstName"
               type="text"
-              value={formData.firstName}
-              onChange={(e) => updateFormData("firstName", e.target.value)}
+value={formData.first_name_c}
+              onChange={(e) => updateFormData("first_name_c", e.target.value)}
               placeholder="Enter first name"
-              className={errors.firstName ? "border-red-300" : ""}
+              className={errors.first_name_c ? "border-red-300" : ""}
             />
-            {errors.firstName && (
-              <p className="text-red-600 text-sm mt-1">{errors.firstName}</p>
+            {errors.first_name_c && (
+<p className="text-sm text-red-500 mt-1">{errors.first_name_c}</p>
             )}
           </div>
           <div>
             <Label htmlFor="lastName">Last Name *</Label>
-            <Input
+<Input
               id="lastName"
               type="text"
-              value={formData.lastName}
-              onChange={(e) => updateFormData("lastName", e.target.value)}
+              value={formData.last_name_c}
+              onChange={(e) => updateFormData("last_name_c", e.target.value)}
               placeholder="Enter last name"
-              className={errors.lastName ? "border-red-300" : ""}
+className={errors.last_name_c ? "border-red-300" : ""}
             />
-            {errors.lastName && (
-              <p className="text-red-600 text-sm mt-1">{errors.lastName}</p>
+            {errors.last_name_c && (
+              <p className="text-sm text-red-500 mt-1">{errors.last_name_c}</p>
             )}
-          </div>
+</div>
           <div>
             <Label htmlFor="email">Email Address *</Label>
             <Input
               id="email"
               type="email"
-              value={formData.email}
-              onChange={(e) => updateFormData("email", e.target.value)}
+              value={formData.email_c}
+              onChange={(e) => updateFormData("email_c", e.target.value)}
               placeholder="Enter email address"
-              className={errors.email ? "border-red-300" : ""}
+              className={errors.email_c ? "border-red-300" : ""}
             />
-            {errors.email && (
-              <p className="text-red-600 text-sm mt-1">{errors.email}</p>
+            {errors.email_c && (
+              <p className="text-sm text-red-500 mt-1">{errors.email_c}</p>
             )}
           </div>
           <div>
-            <Label htmlFor="phone">Phone Number</Label>
+<Label htmlFor="phone">Phone Number</Label>
             <Input
               id="phone"
               type="tel"
-              value={formData.phone}
-              onChange={(e) => updateFormData("phone", e.target.value)}
+              value={formData.phone_c}
+              onChange={(e) => updateFormData("phone_c", e.target.value)}
               placeholder="Enter phone number"
             />
           </div>
@@ -166,21 +172,21 @@ const ContactForm = ({ contact, onSubmit, onCancel, isLoading }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <Label htmlFor="company">Company</Label>
-            <Input
+<Input
               id="company"
               type="text"
-              value={formData.company}
-              onChange={(e) => updateFormData("company", e.target.value)}
+              value={formData.company_c}
+              onChange={(e) => updateFormData("company_c", e.target.value)}
               placeholder="Enter company name"
             />
           </div>
           <div>
             <Label htmlFor="jobTitle">Job Title</Label>
-            <Input
+<Input
               id="jobTitle"
               type="text"
-              value={formData.jobTitle}
-              onChange={(e) => updateFormData("jobTitle", e.target.value)}
+              value={formData.job_title_c}
+              onChange={(e) => updateFormData("job_title_c", e.target.value)}
               placeholder="Enter job title"
             />
           </div>
@@ -196,11 +202,11 @@ const ContactForm = ({ contact, onSubmit, onCancel, isLoading }) => {
         <div className="space-y-4">
           <div>
             <Label htmlFor="street">Street Address</Label>
-            <Input
+<Input
               id="street"
               type="text"
-              value={formData.address.street}
-              onChange={(e) => updateNestedData("address", "street", e.target.value)}
+              value={formData.address_c.street}
+              onChange={(e) => updateNestedData("address_c", "street", e.target.value)}
               placeholder="Enter street address"
             />
           </div>
@@ -210,8 +216,8 @@ const ContactForm = ({ contact, onSubmit, onCancel, isLoading }) => {
               <Input
                 id="city"
                 type="text"
-                value={formData.address.city}
-                onChange={(e) => updateNestedData("address", "city", e.target.value)}
+value={formData.address_c.city}
+                onChange={(e) => updateNestedData("address_c", "city", e.target.value)}
                 placeholder="Enter city"
               />
             </div>
@@ -219,19 +225,19 @@ const ContactForm = ({ contact, onSubmit, onCancel, isLoading }) => {
               <Label htmlFor="state">State</Label>
               <Input
                 id="state"
-                type="text"
-                value={formData.address.state}
-                onChange={(e) => updateNestedData("address", "state", e.target.value)}
+type="text"
+                value={formData.address_c.state}
+                onChange={(e) => updateNestedData("address_c", "state", e.target.value)}
                 placeholder="Enter state"
               />
             </div>
             <div>
               <Label htmlFor="zipCode">ZIP Code</Label>
               <Input
-                id="zipCode"
+id="zipCode"
                 type="text"
-                value={formData.address.zipCode}
-                onChange={(e) => updateNestedData("address", "zipCode", e.target.value)}
+                value={formData.address_c.zipCode}
+                onChange={(e) => updateNestedData("address_c", "zipCode", e.target.value)}
                 placeholder="Enter ZIP code"
               />
             </div>
@@ -241,8 +247,8 @@ const ContactForm = ({ contact, onSubmit, onCancel, isLoading }) => {
             <Input
               id="country"
               type="text"
-              value={formData.address.country}
-              onChange={(e) => updateNestedData("address", "country", e.target.value)}
+value={formData.address_c.country}
+              onChange={(e) => updateNestedData("address_c", "country", e.target.value)}
               placeholder="Enter country"
             />
           </div>
@@ -261,8 +267,8 @@ const ContactForm = ({ contact, onSubmit, onCancel, isLoading }) => {
             <Input
               id="linkedin"
               type="url"
-              value={formData.socialMedia.linkedin}
-              onChange={(e) => updateNestedData("socialMedia", "linkedin", e.target.value)}
+value={formData.social_media_c.linkedin}
+              onChange={(e) => updateNestedData("social_media_c", "linkedin", e.target.value)}
               placeholder="Enter LinkedIn profile URL"
             />
           </div>
@@ -270,29 +276,29 @@ const ContactForm = ({ contact, onSubmit, onCancel, isLoading }) => {
             <Label htmlFor="twitter">Twitter</Label>
             <Input
               id="twitter"
-              type="url"
-              value={formData.socialMedia.twitter}
-              onChange={(e) => updateNestedData("socialMedia", "twitter", e.target.value)}
+type="url"
+              value={formData.social_media_c.twitter}
+              onChange={(e) => updateNestedData("social_media_c", "twitter", e.target.value)}
               placeholder="Enter Twitter profile URL"
             />
           </div>
           <div>
             <Label htmlFor="facebook">Facebook</Label>
             <Input
-              id="facebook"
+id="facebook"
               type="url"
-              value={formData.socialMedia.facebook}
-              onChange={(e) => updateNestedData("socialMedia", "facebook", e.target.value)}
+              value={formData.social_media_c.facebook}
+              onChange={(e) => updateNestedData("social_media_c", "facebook", e.target.value)}
               placeholder="Enter Facebook profile URL"
             />
           </div>
           <div>
             <Label htmlFor="instagram">Instagram</Label>
-            <Input
+<Input
               id="instagram"
               type="url"
-              value={formData.socialMedia.instagram}
-              onChange={(e) => updateNestedData("socialMedia", "instagram", e.target.value)}
+              value={formData.social_media_c.instagram}
+              onChange={(e) => updateNestedData("social_media_c", "instagram", e.target.value)}
               placeholder="Enter Instagram profile URL"
             />
           </div>
@@ -309,9 +315,9 @@ const ContactForm = ({ contact, onSubmit, onCancel, isLoading }) => {
           <Label htmlFor="notes">Notes</Label>
           <textarea
             id="notes"
-            rows={4}
-            value={formData.notes}
-            onChange={(e) => updateFormData("notes", e.target.value)}
+rows={4}
+            value={formData.notes_c}
+            onChange={(e) => updateFormData("notes_c", e.target.value)}
             placeholder="Enter any additional notes or comments..."
             className="flex w-full rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500/20 disabled:cursor-not-allowed disabled:opacity-50 transition-all duration-200 resize-none"
           />
