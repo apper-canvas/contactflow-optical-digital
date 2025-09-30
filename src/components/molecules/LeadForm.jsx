@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { contactService } from "@/services/api/contactService";
+import ApperIcon from "@/components/ApperIcon";
 import Button from "@/components/atoms/Button";
 import Input from "@/components/atoms/Input";
 import Label from "@/components/atoms/Label";
-import ApperIcon from "@/components/ApperIcon";
-import { contactService } from "@/services/api/contactService";
+import Loading from "@/components/ui/Loading";
 
 const LeadForm = ({ lead, onSubmit, onCancel, isLoading }) => {
   const [formData, setFormData] = useState({
@@ -15,26 +16,25 @@ const LeadForm = ({ lead, onSubmit, onCancel, isLoading }) => {
     lead_source_c: '',
     lead_status_c: 'New',
     lead_score_c: '',
-    assigned_to_c: ''
+assigned_to_c: ''
   });
 
-  const [errors, setErrors] = useState({});
-  const [contacts, setContacts] = useState([]);
-  const [loadingContacts, setLoadingContacts] = useState(false);
-
-  useEffect(() => {
-    const loadContacts = async () => {
+const [errors, setErrors] = useState({});
+  const [users, setUsers] = useState([]);
+  const [loadingUsers, setLoadingUsers] = useState(false);
+useEffect(() => {
+    const loadUsers = async () => {
       try {
-        setLoadingContacts(true);
-        const data = await contactService.getAll();
-        setContacts(data);
+        setLoadingUsers(true);
+        const data = await contactService.getUsers();
+        setUsers(data);
       } catch (error) {
-        console.error("Error loading contacts:", error);
+        console.error("Error loading users:", error);
       } finally {
-        setLoadingContacts(false);
+        setLoadingUsers(false);
       }
     };
-    loadContacts();
+    loadUsers();
   }, []);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const LeadForm = ({ lead, onSubmit, onCancel, isLoading }) => {
         lead_source_c: lead.lead_source_c || '',
         lead_status_c: lead.lead_status_c || 'New',
         lead_score_c: lead.lead_score_c !== null && lead.lead_score_c !== undefined ? lead.lead_score_c : '',
-        assigned_to_c: lead.assigned_to_c?.Id || lead.assigned_to_c || ''
+assigned_to_c: lead.assigned_to_c?.Id || lead.assigned_to_c || ''
       });
     }
   }, [lead]);
@@ -86,7 +86,7 @@ const LeadForm = ({ lead, onSubmit, onCancel, isLoading }) => {
         delete submitData.lead_score_c;
       }
       
-      if (!submitData.assigned_to_c) {
+if (!submitData.assigned_to_c) {
         delete submitData.assigned_to_c;
       }
       
@@ -237,24 +237,24 @@ const LeadForm = ({ lead, onSubmit, onCancel, isLoading }) => {
           Lead Assignment
         </h3>
         
-        <div className="grid grid-cols-1 gap-4">
+<div className="grid grid-cols-1 gap-4">
           <div>
             <Label htmlFor="assigned_to_c">Assigned To</Label>
             <select
               id="assigned_to_c"
               value={formData.assigned_to_c}
               onChange={(e) => handleChange('assigned_to_c', e.target.value)}
-              disabled={isLoading || loadingContacts}
+              disabled={isLoading || loadingUsers}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
             >
               <option value="">Unassigned</option>
-              {contacts.map(contact => (
-                <option key={contact.Id} value={contact.Id}>
-                  {contact.first_name_c} {contact.last_name_c}
+              {users.map(user => (
+                <option key={user.Id} value={user.Id}>
+                  {user.first_name_c} {user.last_name_c}
                 </option>
               ))}
             </select>
-            {loadingContacts && <p className="text-sm text-gray-500 mt-1">Loading contacts...</p>}
+            {loadingUsers && <p className="text-sm text-gray-500 mt-1">Loading sales reps...</p>}
           </div>
         </div>
       </div>
