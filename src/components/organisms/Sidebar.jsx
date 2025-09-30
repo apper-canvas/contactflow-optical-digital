@@ -1,16 +1,13 @@
 import { NavLink } from "react-router-dom";
-import ApperIcon from "@/components/ApperIcon";
+import React from "react";
 import { cn } from "@/utils/cn";
+import ApperIcon from "@/components/ApperIcon";
 
 const Sidebar = ({ isMobileMenuOpen, setIsMobileMenuOpen }) => {
   const navigation = [
-    { name: "Dashboard", href: "/", icon: "LayoutDashboard" },
+    { name: "Dashboard", href: "/", icon: "Home" },
     { name: "Contacts", href: "/contacts", icon: "Users" },
-    { name: "Leads", href: "/leads", icon: "Target" },
-    { name: "Reports", href: "/reports", icon: "BarChart3" },
-    { name: "Settings", href: "/settings", icon: "Settings" },
   ];
-
   const handleNavClick = () => {
     setIsMobileMenuOpen(false);
   };
