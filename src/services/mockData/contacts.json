@@ -1,0 +1,262 @@
+[
+  {
+    "Id": 1,
+    "firstName": "Sarah",
+    "lastName": "Johnson",
+    "email": "sarah.johnson@techcorp.com",
+    "phone": "+1 (555) 123-4567",
+    "company": "TechCorp Solutions",
+    "jobTitle": "Senior Product Manager",
+    "address": {
+      "street": "123 Tech Street",
+      "city": "San Francisco",
+      "state": "CA",
+      "zipCode": "94105",
+      "country": "United States"
+    },
+    "socialMedia": {
+      "linkedin": "https://linkedin.com/in/sarahjohnson",
+      "twitter": "https://twitter.com/sarahj_tech",
+      "facebook": "",
+      "instagram": ""
+    },
+    "notes": "Key decision maker for enterprise software purchases. Interested in AI/ML solutions. Best contact time: 2-4 PM PST.",
+    "tags": ["Enterprise", "Product Manager", "AI/ML"],
+    "createdAt": "2024-01-15T09:30:00Z",
+    "updatedAt": "2024-03-10T14:22:00Z"
+  },
+  {
+    "Id": 2,
+    "firstName": "Michael",
+    "lastName": "Chen",
+    "email": "m.chen@innovate.io",
+    "phone": "+1 (555) 234-5678",
+    "company": "Innovate Labs",
+    "jobTitle": "CTO",
+    "address": {
+      "street": "456 Innovation Ave",
+      "city": "Austin",
+      "state": "TX",
+      "zipCode": "78701",
+      "country": "United States"
+    },
+    "socialMedia": {
+      "linkedin": "https://linkedin.com/in/michaelchen",
+      "twitter": "",
+      "facebook": "",
+      "instagram": ""
+    },
+    "notes": "Technical leader with extensive cloud architecture experience. Looking for scalable solutions for their growing startup.",
+    "tags": ["CTO", "Cloud", "Startup"],
+    "createdAt": "2024-02-03T11:15:00Z",
+    "updatedAt": "2024-03-08T16:45:00Z"
+  },
+  {
+    "Id": 3,
+    "firstName": "Emily",
+    "lastName": "Davis",
+    "email": "emily.davis@marketpro.com",
+    "phone": "+1 (555) 345-6789",
+    "company": "MarketPro Agency",
+    "jobTitle": "Marketing Director",
+    "address": {
+      "street": "789 Marketing Blvd",
+      "city": "New York",
+      "state": "NY",
+      "zipCode": "10001",
+      "country": "United States"
+    },
+    "socialMedia": {
+      "linkedin": "https://linkedin.com/in/emilydavis",
+      "twitter": "https://twitter.com/emily_marketing",
+      "facebook": "https://facebook.com/emilydavis",
+      "instagram": "https://instagram.com/emily_marketpro"
+    },
+    "notes": "Creative marketing professional with focus on digital campaigns. Interested in automation tools for lead generation.",
+    "tags": ["Marketing", "Digital", "Automation"],
+    "createdAt": "2024-01-28T14:20:00Z",
+    "updatedAt": "2024-03-12T10:30:00Z"
+  },
+  {
+    "Id": 4,
+    "firstName": "David",
+    "lastName": "Rodriguez",
+    "email": "david.rodriguez@financeplus.com",
+    "phone": "+1 (555) 456-7890",
+    "company": "FinancePlus Inc",
+    "jobTitle": "VP of Finance",
+    "address": {
+      "street": "321 Finance Way",
+      "city": "Chicago",
+      "state": "IL",
+      "zipCode": "60601",
+      "country": "United States"
+    },
+    "socialMedia": {
+      "linkedin": "https://linkedin.com/in/davidrodriguez",
+      "twitter": "",
+      "facebook": "",
+      "instagram": ""
+    },
+    "notes": "Finance executive focused on cost optimization and ROI. Evaluating financial management software solutions.",
+    "tags": ["Finance", "VP", "ROI"],
+    "createdAt": "2024-02-10T08:45:00Z",
+    "updatedAt": "2024-03-05T13:15:00Z"
+  },
+  {
+    "Id": 5,
+    "firstName": "Lisa",
+    "lastName": "Thompson",
+    "email": "lisa.thompson@healthtech.com",
+    "phone": "+1 (555) 567-8901",
+    "company": "HealthTech Innovations",
+    "jobTitle": "Head of Operations",
+    "address": {
+      "street": "654 Health Plaza",
+      "city": "Boston",
+      "state": "MA",
+      "zipCode": "02101",
+      "country": "United States"
+    },
+    "socialMedia": {
+      "linkedin": "https://linkedin.com/in/lisathompson",
+      "twitter": "",
+      "facebook": "",
+      "instagram": ""
+    },
+    "notes": "Operations leader in healthcare technology. Compliance and security are top priorities for any new solutions.",
+    "tags": ["Healthcare", "Operations", "Compliance"],
+    "createdAt": "2024-01-20T10:00:00Z",
+    "updatedAt": "2024-03-01T15:40:00Z"
+  },
+  {
+    "Id": 6,
+    "firstName": "James",
+    "lastName": "Wilson",
+    "email": "james.wilson@retailmax.com",
+    "phone": "+1 (555) 678-9012",
+    "company": "RetailMax Corp",
+    "jobTitle": "IT Manager",
+    "address": {
+      "street": "987 Retail Row",
+      "city": "Seattle",
+      "state": "WA",
+      "zipCode": "98101",
+      "country": "United States"
+    },
+    "socialMedia": {
+      "linkedin": "https://linkedin.com/in/jameswilson",
+      "twitter": "https://twitter.com/james_it",
+      "facebook": "",
+      "instagram": ""
+    },
+    "notes": "IT professional managing systems for large retail chain. Looking for inventory management and POS solutions.",
+    "tags": ["IT", "Retail", "Inventory"],
+    "createdAt": "2024-02-15T12:30:00Z",
+    "updatedAt": "2024-03-07T11:20:00Z"
+  },
+  {
+    "Id": 7,
+    "firstName": "Anna",
+    "lastName": "Martinez",
+    "email": "anna.martinez@edutech.org",
+    "phone": "+1 (555) 789-0123",
+    "company": "EduTech Solutions",
+    "jobTitle": "Product Owner",
+    "address": {
+      "street": "147 Education Lane",
+      "city": "Denver",
+      "state": "CO",
+      "zipCode": "80202",
+      "country": "United States"
+    },
+    "socialMedia": {
+      "linkedin": "https://linkedin.com/in/annamartinez",
+      "twitter": "",
+      "facebook": "https://facebook.com/anna.martinez",
+      "instagram": ""
+    },
+    "notes": "Product owner focused on educational technology solutions. Interested in accessibility and user experience improvements.",
+    "tags": ["Education", "Product", "UX"],
+    "createdAt": "2024-01-25T13:45:00Z",
+    "updatedAt": "2024-03-09T09:10:00Z"
+  },
+  {
+    "Id": 8,
+    "firstName": "Robert",
+    "lastName": "Brown",
+    "email": "robert.brown@logistics.com",
+    "phone": "+1 (555) 890-1234",
+    "company": "Global Logistics Ltd",
+    "jobTitle": "Supply Chain Director",
+    "address": {
+      "street": "258 Logistics Drive",
+      "city": "Atlanta",
+      "state": "GA",
+      "zipCode": "30301",
+      "country": "United States"
+    },
+    "socialMedia": {
+      "linkedin": "https://linkedin.com/in/robertbrown",
+      "twitter": "",
+      "facebook": "",
+      "instagram": ""
+    },
+    "notes": "Supply chain expert with global perspective. Looking for tracking and optimization tools for international shipments.",
+    "tags": ["Logistics", "Supply Chain", "Global"],
+    "createdAt": "2024-02-08T16:20:00Z",
+    "updatedAt": "2024-03-11T14:55:00Z"
+  },
+  {
+    "Id": 9,
+    "firstName": "Michelle",
+    "lastName": "Lee",
+    "email": "michelle.lee@startupventures.com",
+    "phone": "+1 (555) 901-2345",
+    "company": "Startup Ventures",
+    "jobTitle": "Founder & CEO",
+    "address": {
+      "street": "369 Venture Street",
+      "city": "Palo Alto",
+      "state": "CA",
+      "zipCode": "94301",
+      "country": "United States"
+    },
+    "socialMedia": {
+      "linkedin": "https://linkedin.com/in/michellelee",
+      "twitter": "https://twitter.com/michelle_ceo",
+      "facebook": "",
+      "instagram": "https://instagram.com/michelle_ventures"
+    },
+    "notes": "Serial entrepreneur and investor. Always looking for innovative solutions to scale startup operations.",
+    "tags": ["CEO", "Startup", "Investor"],
+    "createdAt": "2024-01-30T11:30:00Z",
+    "updatedAt": "2024-03-13T16:00:00Z"
+  },
+  {
+    "Id": 10,
+    "firstName": "Chris",
+    "lastName": "Anderson",
+    "email": "chris.anderson@consulting.pro",
+    "phone": "+1 (555) 012-3456",
+    "company": "Strategic Consulting Pro",
+    "jobTitle": "Senior Consultant",
+    "address": {
+      "street": "741 Consulting Circle",
+      "city": "Miami",
+      "state": "FL",
+      "zipCode": "33101",
+      "country": "United States"
+    },
+    "socialMedia": {
+      "linkedin": "https://linkedin.com/in/chrisanderson",
+      "twitter": "",
+      "facebook": "",
+      "instagram": ""
+    },
+    "notes": "Management consultant specializing in digital transformation. Helps clients adopt new technologies and processes.",
+    "tags": ["Consulting", "Digital Transformation", "Strategy"],
+    "createdAt": "2024-02-12T09:15:00Z",
+    "updatedAt": "2024-03-06T12:45:00Z"
+  }
+]
