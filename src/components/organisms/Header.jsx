@@ -1,10 +1,9 @@
-import { useContext } from "react";
 import Button from "@/components/atoms/Button";
 import ApperIcon from "@/components/ApperIcon";
-import { AuthContext } from "@/App";
+import { useAuth } from "@/layouts/Root";
 
 const Header = ({ title, onMobileMenuToggle }) => {
-  const { logout } = useContext(AuthContext);
+  const { logout } = useAuth();
   
   return (
     <header className="bg-white border-b border-gray-200 shadow-sm">
