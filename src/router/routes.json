@@ -25,12 +25,25 @@
       "redirectOnDeny": "/login"
     }
   },
-  "/contacts": {
+"/contacts": {
     "allow": {
       "when": {
         "conditions": [
           {
             "label": "User must be logged in to view contacts",
+            "rule": "authenticated"
+          }
+        ]
+      },
+      "redirectOnDeny": "/login"
+    }
+  },
+  "/deals": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "User must be logged in to view deals",
             "rule": "authenticated"
           }
         ]

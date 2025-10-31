@@ -7,6 +7,7 @@ const Sidebar = ({ isMobileMenuOpen, setIsMobileMenuOpen }) => {
 const navigation = [
     { name: "Dashboard", href: "/", icon: "Home" },
     { name: "Leads", href: "/leads", icon: "Target" },
+    { name: "Deals", href: "/deals", icon: "ShoppingCart" },
     { name: "Contacts", href: "/contacts", icon: "Users" },
   ];
   const handleNavClick = () => {

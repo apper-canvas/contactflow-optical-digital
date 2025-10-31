@@ -15,6 +15,7 @@ const NotFound = lazy(() => import('@/components/pages/NotFound'));
 const DashboardPage = lazy(() => import('@/components/pages/DashboardPage'));
 const ContactsPage = lazy(() => import('@/components/pages/ContactsPage'));
 const LeadsPage = lazy(() => import('@/components/pages/LeadsPage'));
+const DealsPage = lazy(() => import('@/components/pages/DealsPage'));
 
 // Loading spinner component
 const LoadingSpinner = () => (
@@ -85,7 +86,8 @@ export const router = createBrowserRouter([
         children: [
           createRoute({ index: true, element: <DashboardPage /> }),
           createRoute({ path: 'leads', element: <LeadsPage /> }),
-          createRoute({ path: 'contacts', element: <ContactsPage /> }),
+createRoute({ path: 'contacts', element: <ContactsPage /> }),
+          createRoute({ path: 'deals', element: <DealsPage /> }),
         ]
       },
       
