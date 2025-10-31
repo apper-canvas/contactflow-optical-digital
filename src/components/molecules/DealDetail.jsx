@@ -1,5 +1,5 @@
 import React from 'react';
-import Card from '@/components/atoms/Card';
+import { Card, CardContent } from '@/components/atoms/Card';
 import Button from '@/components/atoms/Button';
 import ApperIcon from '@/components/ApperIcon';
 import { format } from 'date-fns';
