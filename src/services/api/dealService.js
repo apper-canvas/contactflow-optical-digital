@@ -10,7 +10,7 @@ class DealService {
       }
 
       const response = await apperClient.fetchRecords('deals_c', {
-        fields: [
+fields: [
           { field: { Name: 'Id' } },
           { field: { Name: 'Name' } },
           { field: { Name: 'deal_name_c' } },
@@ -21,6 +21,11 @@ class DealService {
           { field: { Name: 'associated_contact_c' } },
           { field: { Name: 'associated_company_c' } },
           { field: { Name: 'owner_c' } },
+          { field: { Name: 'contact_name_c' } },
+          { field: { Name: 'industry_c' } },
+          { field: { Name: 'company_size_c' } },
+          { field: { Name: 'is_active_c' } },
+          { field: { Name: 'custom_fields_c' } },
           { field: { Name: 'Tags' } },
           { field: { Name: 'CreatedOn' } },
           { field: { Name: 'ModifiedOn' } }
@@ -52,7 +57,7 @@ class DealService {
 
       const response = await apperClient.getRecordById('deals_c', id, {
         fields: [
-          { field: { Name: 'Id' } },
+{ field: { Name: 'Id' } },
           { field: { Name: 'Name' } },
           { field: { Name: 'deal_name_c' } },
           { field: { Name: 'deal_value_c' } },
@@ -62,6 +67,11 @@ class DealService {
           { field: { Name: 'associated_contact_c' } },
           { field: { Name: 'associated_company_c' } },
           { field: { Name: 'owner_c' } },
+          { field: { Name: 'contact_name_c' } },
+          { field: { Name: 'industry_c' } },
+          { field: { Name: 'company_size_c' } },
+          { field: { Name: 'is_active_c' } },
+          { field: { Name: 'custom_fields_c' } },
           { field: { Name: 'Tags' } },
           { field: { Name: 'CreatedOn' } },
           { field: { Name: 'CreatedBy' } },
@@ -93,7 +103,7 @@ class DealService {
 
       // Only include Updateable fields
       const payload = {
-        records: [{
+records: [{
           Name: dealData.Name || dealData.deal_name_c || 'New Deal',
           deal_name_c: dealData.deal_name_c,
           deal_value_c: dealData.deal_value_c ? parseFloat(dealData.deal_value_c) : 0,
@@ -102,7 +112,12 @@ class DealService {
           expected_close_date_c: dealData.expected_close_date_c,
           associated_contact_c: dealData.associated_contact_c ? parseInt(dealData.associated_contact_c) : null,
           associated_company_c: dealData.associated_company_c,
-          owner_c: dealData.owner_c ? parseInt(dealData.owner_c) : null
+          owner_c: dealData.owner_c ? parseInt(dealData.owner_c) : null,
+          contact_name_c: dealData.contact_name_c,
+          industry_c: dealData.industry_c,
+          company_size_c: dealData.company_size_c,
+          is_active_c: dealData.is_active_c !== undefined ? dealData.is_active_c : true,
+          custom_fields_c: dealData.custom_fields_c
         }]
       };
 
@@ -158,7 +173,7 @@ class DealService {
       const payload = {
         records: [{
           Id: parseInt(id),
-          Name: dealData.Name || dealData.deal_name_c || 'New Deal',
+Name: dealData.Name || dealData.deal_name_c || 'New Deal',
           deal_name_c: dealData.deal_name_c,
           deal_value_c: dealData.deal_value_c ? parseFloat(dealData.deal_value_c) : 0,
           deal_stage_c: dealData.deal_stage_c,
@@ -166,7 +181,12 @@ class DealService {
           expected_close_date_c: dealData.expected_close_date_c,
           associated_contact_c: dealData.associated_contact_c ? parseInt(dealData.associated_contact_c) : null,
           associated_company_c: dealData.associated_company_c,
-          owner_c: dealData.owner_c ? parseInt(dealData.owner_c) : null
+          owner_c: dealData.owner_c ? parseInt(dealData.owner_c) : null,
+          contact_name_c: dealData.contact_name_c,
+          industry_c: dealData.industry_c,
+          company_size_c: dealData.company_size_c,
+          is_active_c: dealData.is_active_c !== undefined ? dealData.is_active_c : true,
+          custom_fields_c: dealData.custom_fields_c
         }]
       };
 
@@ -260,7 +280,7 @@ class DealService {
 
       const response = await apperClient.fetchRecords('deals_c', {
         fields: [
-          { field: { Name: 'Id' } },
+{ field: { Name: 'Id' } },
           { field: { Name: 'Name' } },
           { field: { Name: 'deal_name_c' } },
           { field: { Name: 'deal_value_c' } },
@@ -269,14 +289,21 @@ class DealService {
           { field: { Name: 'expected_close_date_c' } },
           { field: { Name: 'associated_contact_c' } },
           { field: { Name: 'associated_company_c' } },
-          { field: { Name: 'owner_c' } }
+          { field: { Name: 'owner_c' } },
+          { field: { Name: 'contact_name_c' } },
+          { field: { Name: 'industry_c' } },
+          { field: { Name: 'company_size_c' } },
+          { field: { Name: 'is_active_c' } },
+          { field: { Name: 'custom_fields_c' } }
         ],
         whereGroups: [{
           operator: 'OR',
           subGroups: [{
-            conditions: [
+conditions: [
               { fieldName: 'deal_name_c', operator: 'Contains', values: [query] },
-              { fieldName: 'associated_company_c', operator: 'Contains', values: [query] }
+              { fieldName: 'associated_company_c', operator: 'Contains', values: [query] },
+              { fieldName: 'contact_name_c', operator: 'Contains', values: [query] },
+              { fieldName: 'industry_c', operator: 'Contains', values: [query] }
             ],
             operator: 'OR'
           }]

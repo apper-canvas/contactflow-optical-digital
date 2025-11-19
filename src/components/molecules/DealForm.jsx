@@ -8,7 +8,7 @@ import Label from '@/components/atoms/Label';
 import Loading from '@/components/ui/Loading';
 
 function DealForm({ deal, onSubmit, onCancel, mode = 'create' }) {
-  const [formData, setFormData] = useState({
+const [formData, setFormData] = useState({
     Name: '',
     deal_name_c: '',
     deal_value_c: '',
@@ -17,7 +17,12 @@ function DealForm({ deal, onSubmit, onCancel, mode = 'create' }) {
     expected_close_date_c: '',
     associated_contact_c: '',
     associated_company_c: '',
-    owner_c: ''
+    owner_c: '',
+    contact_name_c: '',
+    industry_c: '',
+    company_size_c: '',
+    is_active_c: true,
+    custom_fields_c: ''
   });
 
   const [users, setUsers] = useState([]);
@@ -41,7 +46,7 @@ function DealForm({ deal, onSubmit, onCancel, mode = 'create' }) {
 
   useEffect(() => {
     if (deal && mode === 'edit') {
-      setFormData({
+setFormData({
         Name: deal.Name || '',
         deal_name_c: deal.deal_name_c || '',
         deal_value_c: deal.deal_value_c?.toString() || '',
@@ -50,7 +55,12 @@ function DealForm({ deal, onSubmit, onCancel, mode = 'create' }) {
         expected_close_date_c: deal.expected_close_date_c || '',
         associated_contact_c: deal.associated_contact_c?.Id?.toString() || '',
         associated_company_c: deal.associated_company_c || '',
-        owner_c: deal.owner_c?.Id?.toString() || ''
+        owner_c: deal.owner_c?.Id?.toString() || '',
+        contact_name_c: deal.contact_name_c || '',
+        industry_c: deal.industry_c || '',
+        company_size_c: deal.company_size_c || '',
+        is_active_c: deal.is_active_c !== undefined ? deal.is_active_c : true,
+        custom_fields_c: deal.custom_fields_c || ''
       });
     }
   }, [deal, mode]);
@@ -287,6 +297,68 @@ function DealForm({ deal, onSubmit, onCancel, mode = 'create' }) {
                   </option>
                 ))}
               </select>
+            </div>
+{/* Contact Name */}
+            <div>
+              <Label htmlFor="contact_name_c">Contact Name</Label>
+              <Input
+                id="contact_name_c"
+                type="text"
+                value={formData.contact_name_c}
+                onChange={(e) => handleChange('contact_name_c', e.target.value)}
+                placeholder="Enter contact name"
+              />
+            </div>
+
+            {/* Industry */}
+            <div>
+              <Label htmlFor="industry_c">Industry</Label>
+              <Input
+                id="industry_c"
+                type="text"
+                value={formData.industry_c}
+                onChange={(e) => handleChange('industry_c', e.target.value)}
+                placeholder="Enter industry"
+              />
+            </div>
+
+            {/* Company Size */}
+            <div>
+              <Label htmlFor="company_size_c">Company Size</Label>
+              <Input
+                id="company_size_c"
+                type="text"
+                value={formData.company_size_c}
+                onChange={(e) => handleChange('company_size_c', e.target.value)}
+                placeholder="Enter company size (e.g., 1-10, 50-100)"
+              />
+            </div>
+
+            {/* Is Active */}
+            <div>
+              <div className="flex items-center space-x-2">
+                <input
+                  id="is_active_c"
+                  type="checkbox"
+                  checked={formData.is_active_c}
+                  onChange={(e) => handleChange('is_active_c', e.target.checked)}
+                  className="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500 focus:ring-2"
+                />
+                <Label htmlFor="is_active_c">Is Active</Label>
+              </div>
+            </div>
+
+            {/* Custom Fields */}
+            <div className="md:col-span-2">
+              <Label htmlFor="custom_fields_c">Custom Fields</Label>
+              <textarea
+                id="custom_fields_c"
+                value={formData.custom_fields_c}
+                onChange={(e) => handleChange('custom_fields_c', e.target.value)}
+                placeholder="Enter any additional custom information..."
+                rows={4}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-vertical"
+              />
             </div>
           </div>
 
